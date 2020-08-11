@@ -6,30 +6,60 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import PillowWriter
 import matplotlib.animation as animation
 
-def f(x,y): # This is our function
-    return np.sin(x) ** 10 + np.cos(10 + y * x) * np.cos(x)
+# Constants
+i = 1
+j = 1
+a_ij = i * 1
+L = 5
+v = 1
+k_i = i * np.pi / L 
+k_j = j * np.pi / L
+k_i2 = 3 * k_i 
+k_j2 = 3 * k_j 
+k_i3 = 3 * k_i2 
+k_j3 = 3 * k_j2 
+w_ij = np.sqrt(k_i ** 2 + k_j ** 2) * v
+
+def f(x,y,t): # our function
+    return a_ij * np.cos(w_ij * t) * np.sin(k_i * x) * np.sin(k_j * y) + a_ij * np.cos(w_ij * t) * np.sin(k_i2 * x) * np.sin(k_j2 * y) + a_ij * np.cos(w_ij * t) * np.sin(k_i3 * x) * np.sin(k_j3 * y)
 
 
 # Points of generated data
-x = np.linspace (0, 5, 50)
-y = np.linspace (0, 5, 40)
+x0 = np.linspace(0,pi,100)
+y0 = np.linspace(0,pi,100)
+
+#Initial time, time step
+t0 = 0
+dt = 0.05
 
 # Meshgrid
-print("before meshgrid: \n","x-values: \n",x,"\n\n y-values:\n",y,"\n")
-X, Y = np.meshgrid(x, y)    #(1)
-print("After meshgrid: \n", "x-values: \n", X,"\n\n y-values:\n",Y, "\n")
-Z = f(X, Y)                 #(2)
-    # Notes:
-    # (1) Make N-D coordinate arrays for vectorized evaluations of N-D scalar/vector fields over N-D grids,
-    # given one-dimensional coordinate arrays x1, x2,…, xn
+X, Y = np.meshgrid(x0, y0)    #(1)
 
-    # (2) inputs
+a = []
+for i in range(500):
+    value = f(X,Y,t0)
+    t0 = t0 + dt
+    a.append(value)
 
-plt.contourf(X, Y, Z, 100, cmap='Spectral')
+plt.contourf(X, Y, value, 100, cmap='Spectral')
 plt.colorbar();
 
 plt.show()
 
+# ///////////////////////////////////////
+
+
+#k = 0
+#def animate(i):
+#    global k
+#    x = a[k]
+#    k += 1
+#    ax1 = plt.subplot(1,2,1)    
+#    ax1.clear()
+#    plt.plot(x0,x,color='#87FF59')
+#    plt.grid(True)
+#    plt.ylim([-2,2])
+#    plt.xlim([0,pi/k_1])
 
 # ===========================================================================
 # For animating:
