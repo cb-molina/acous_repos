@@ -21,12 +21,12 @@ k_j3 = 3 * k_j2
 w_ij = np.sqrt(k_i ** 2 + k_j ** 2) * v
 
 def f(x,y,t): # our function
-    return a_ij * np.cos(w_ij * t) * np.sin(k_i * x) * np.sin(k_j * y) + a_ij * np.cos(w_ij * t) * np.sin(k_i2 * x) * np.sin(k_j2 * y) + a_ij * np.cos(w_ij * t) * np.sin(k_i3 * x) * np.sin(k_j3 * y)
+    return a_ij * np.cos(w_ij * t) * np.sin(k_i * x) * np.sin(k_j * y)
 
 
 # Points of generated data
-x0 = np.linspace(0,pi,100)
-y0 = np.linspace(0,pi,100)
+x0 = np.linspace(-pi,pi,100)
+y0 = np.linspace(-pi,pi,100)
 
 #Initial time, time step
 t0 = 0
@@ -41,6 +41,8 @@ for i in range(500):
     t0 = t0 + dt
     a.append(value)
 
+
+print(value,"\n")
 plt.contourf(X, Y, value, 100, cmap='Spectral')
 plt.colorbar();
 
