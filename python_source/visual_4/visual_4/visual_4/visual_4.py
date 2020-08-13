@@ -54,6 +54,6 @@ def animate(i):
     
 anim = animation.FuncAnimation(fig,animate,frames=360,interval=20)
 writer = PillowWriter(fps=25) 
-# anim.save('waveeq2.gif', writer=writer)
+# anim.save('visual_4.gif', writer=writer)
 
 plt.show()
