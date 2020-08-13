@@ -44,7 +44,7 @@ def animate(i):
 anim = animation.FuncAnimation(fig, animate, interval=150, frames=len(t)-1)
 
 writer = PillowWriter(fps=25) 
-anim.save('visual_1.gif', writer=writer)
+#anim.save('visual_1.gif', writer=writer)
 
 plt.draw()
 plt.show()
