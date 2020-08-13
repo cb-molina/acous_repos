@@ -32,7 +32,7 @@ def f(x,n):
     return np.sin(k_values[n] * x)
 
 a = []
-n = 0
+n = 2
 
 for i in range(500):
     for m in range(-1,n):
