@@ -41,17 +41,19 @@ def transverse_wave(x, frames_per_cycle, num_frames, wave_len=2*np.pi, amplitude
 #    return x_frames, y_frames
 #%%
 
-#number of particles/data points on the graph
-num_particles = 48
-#array of x inputs with shape=(num_particles, 1)
-x_inputs = np.array([np.linspace(0, 6*np.pi, num_particles)])
-
 frames_per_cycle = 100
 num_frames = 400
 
-x_trans, y_trans = transverse_wave(x_inputs, frames_per_cycle=frames_per_cycle,
+#number of particles/data points on the graph
+num_particles = 48
+#array of x inputs with shape=(num_particles, 1)
+x_inputs_trans = np.array([np.linspace(0, 6*np.pi, num_particles)])
+
+#get data points
+x_trans, y_trans = transverse_wave(x_inputs_trans, frames_per_cycle=frames_per_cycle,
                                    num_frames=num_frames, wave_len=2*np.pi, amplitude=1, phase=0)
 
+#get data points
 #x_long, y_long = longitudinal_wave(x_pos, y_pos, frames_per_cycle=frames_per_cycle,
 #                                   wave_len=10, amplitude=1, num_frames=num_frames )
 #%%
@@ -63,17 +65,43 @@ ax_trans = fig_waves.add_subplot(111)
 #ax_test = fig_waves.add_subplot(3,1,2)
 #ax_long = fig_waves.add_subplot(2,1,2)
 
+#setup for vertical line
+x_phi_v = np.repeat(-1.5, num_frames)
+y_phi_min_v = np.repeat(0.0, num_frames)
+y_phi_max_v = np.repeat(1.0, num_frames)
+#setup for horizontal line (top)
+y_phi_h1 = np.repeat(1.0, num_frames)
+x_phi_min_h1 = np.repeat(-2.0, num_frames)
+x_phi_max_h1 = np.repeat(-1.0, num_frames)
+#setup for horizontal line (bottom)
+y_phi_h2 = np.repeat(0.0, num_frames)
+x_phi_min_h2 = np.repeat(-2.0, num_frames)
+x_phi_max_h2 = np.repeat(-1.0, num_frames)
+#setup for text
+text_x = np.repeat(-2.8, num_frames)
+text_y = np.repeat(3.8, num_frames)
+#horizontal line at equilibrum
+zero_line_y = np.repeat(0.0, num_frames)
+
 j = 0
 def animate(i):
     global j
     j += 1
    
     ax_trans.clear()
+    ax_trans.set_axis_off()
     ax_trans.scatter(x_trans[j,:,:], y_trans[j,:,:], color="cyan")
     ax_trans.scatter(x_trans[j,0,0], y_trans[j,0,0], color="purple")
-    ax_trans.scatter(x_trans[j,0,-1], y_trans[j,0,-1], color="purple")
-    plt.xlim(0,6*np.pi)
-    plt.ylim(-1,1)
+    #ax_trans.scatter(x_trans[j,0,-1], y_trans[j,0,-1], color="purple")
+    plt.xlim(-np.pi,20)
+    plt.ylim(-1.5,1.5)
+    ## marker to show phi
+    plt.vlines(x_phi_v[j], y_phi_min_v[j], y_phi_max_v[j], colors="black", linestyles="solid", linewidth=4)
+    plt.hlines(y_phi_h1[j], x_phi_min_h1[j], x_phi_max_h1[j], colors="black", linestyles="solid", linewidth=2)
+    plt.hlines(y_phi_h2[j], x_phi_min_h2[j], x_phi_max_h2[j], colors="black", linestyles="solid", linewidth=2)
+    ## text on plot
+    plt.text(text_x[j], text_y[j], "$\Phi$", fontsize=20)
+    plt.axhline(zero_line_y[j], linestyle="dashed")
 
 #    ax_long.clear()
 #    ax_long.scatter(x_long[j,:,:], y_long[j,:,:], color="orange")
