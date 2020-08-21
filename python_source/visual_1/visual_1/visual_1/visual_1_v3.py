@@ -35,7 +35,27 @@ G = t_dependent * np.sin(k_i * X3) * np.sin(k_j * Y3) + \
 
 print("This is the data we want to get:\n\n",G[:-1, :-1, 0],"\n\n=====================================================")
 
+kvalue = 1
+ki_values = [kvalue, kvalue * 3, kvalue * 9]
+kj_values = [kvalue, kvalue * 3, kvalue * 9]
+# indexing of the ki/j_values will be done with n
 
+# We'll make v constant for now
+def omega(ki, kj, n):
+    return np.sqrt(ki ** 2 + kj ** 2) * v
+# This is the time dependent portion of the wave equation
+def g(t,ki,kj,n):
+    return a_ij * np.cos(omega(ki,kj,n) * t)
+# This is the spatial dependent portion of the wave equation
+def f(x,y,ki,kj,n):
+    return np.sin(ki[n] * x) * np.sin(kj[n] * y)
+# This is the loop I need to make to run through the k values.
+for m in 
+
+
+
+# Uncommment this section once you produce the same data as G
+# ========================================================================================================
 #cax = ax.pcolormesh(x, y, G[:-1, :-1, 0], vmin=-1, vmax=1, cmap='Spectral')
 # G[:-1, :-1, 0] indicates all the 
 
