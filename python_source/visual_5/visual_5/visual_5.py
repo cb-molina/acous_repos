@@ -10,7 +10,7 @@ fig.set_dpi(100)
 
 x = np.linspace(0,np.pi*2,1000)
 
-n = 5
+n = 51
 L = 1
 
 def triangle_wave(x,n):
@@ -24,5 +24,5 @@ for m in range(1,n+1):
     y = y + y1
     plt.plot(x,y1,color='red')
 
-#plt.plot(x,y,color='yellow')
+plt.plot(x,y,color='yellow')
 plt.show()
