@@ -47,6 +47,7 @@ cax = ax.pcolormesh(x, y, gg[:-1, :-1, 0], vmin=-1, vmax=1, cmap='Spectral')
 fig.colorbar(cax) 
 def animate(i):
      cax.set_array(gg[:-1, :-1, i].flatten())
+
 anim = animation.FuncAnimation(fig, animate, interval=150, frames=len(t)-1)
 
 writer = PillowWriter(fps=25) 
