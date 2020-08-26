@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>316c804b-d868-4dae-ab41-b28f306e6ebb</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>visual_5.py</StartupFile>
+    <StartupFile>visual_5_v2.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="visual_5.py" />
+    <Compile Include="visual_5_v2.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
