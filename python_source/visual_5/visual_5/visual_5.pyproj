@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>316c804b-d868-4dae-ab41-b28f306e6ebb</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>visual_5_v2.py</StartupFile>
+    <StartupFile>visual_5_v3.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="animated_histogram.py" />
+    <Compile Include="visual_5_v3.py" />
     <Compile Include="visual_5.py" />
     <Compile Include="visual_5_v2.py" />
   </ItemGroup>
