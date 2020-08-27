@@ -21,7 +21,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="animated_histogram.py" />
     <Compile Include="visual_5_v3.py" />
     <Compile Include="visual_5.py" />
     <Compile Include="visual_5_v2.py" />
