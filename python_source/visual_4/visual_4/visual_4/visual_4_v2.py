@@ -1,3 +1,11 @@
+""" Notes on this version: visual_4_v2
+For the project, utilization of this version of visual_4 has been lost and may be changed entirely
+But this code is really good in my personal opinion, for it utilizes various defined functions and shows different modes
+of a wave with it's time evolution.
+
+Christian B. Molina 08/27/2020
+"""
+
 import numpy as np
 from numpy import pi
 import matplotlib.pyplot as plt
@@ -13,7 +21,7 @@ fig.set_dpi(100)
 v = 1
 # k values
 k_1 = 1
-k_values = [k_1, 3*k_1, 9*k_1]
+k_values = [k_1, 3*k_1, 9*k_1, 27*k_1]
 #x axis
 x0 = np.linspace(0,pi,10000)
 #Initial time
@@ -21,9 +29,9 @@ t0 = 0
 #Time increment
 dt = 0.05
 
+
 def omega(k,v):
     return k * v
-
 # Wave Equation - time part
 def g(t,n):
     return np.cos(omega(k_values[n],v) * t)
@@ -43,9 +51,11 @@ def genWave(n):
         t0 = t0 + dt
         a.append(value)
 
+#Execution of triangle wave
 genWave(0)
 genWave(1)
 genWave(2)
+#genWave(3)
 
 k = 0
 def animate(i):
@@ -61,6 +71,6 @@ def animate(i):
     
 anim = animation.FuncAnimation(fig,animate,frames=360,interval=20)
 writer = PillowWriter(fps=25) 
-anim.save('visual_4.gif', writer=writer)
+#anim.save('visual_4.gif', writer=writer)
 
 plt.show()
