@@ -8,13 +8,21 @@ import matplotlib.animation as animation
 i = j = v = 1
 a_ij = i * 1
 L = 5
-k_i = i * np.pi / L 
-k_j = j * np.pi / L
-k_i2 = 3 * k_i 
-k_j2 = 3 * k_j 
-k_i3 = 3 * k_i2 
-k_j3 = 3 * k_j2 
-w_ij = np.sqrt(k_i ** 2 + k_j ** 2) * v
+
+"""
+    k_i = i * np.pi / L 
+    k_j = j * np.pi / L
+    k_i2 = 3 * k_i 
+    k_j2 = 3 * k_j 
+    k_i3 = 3 * k_i2 
+    k_j3 = 3 * k_j2
+    k_i4 = 3 * k_i3 
+    k_j4 = 3 * k_j3
+    k_i5 = 3 * k_i4 
+    k_j5 = 3 * k_j4
+    w_ij = np.sqrt(k_i ** 2 + k_j ** 2) * v
+"""
+
 
 # Created a figure and configured its size
 fig, ax = plt.subplots()
@@ -28,17 +36,37 @@ y = np.linspace(0, np.pi, 100)
 X3, Y3, T3 = np.meshgrid(x, y, t) # each var3 is an array
 
 # our Equation: a_ij * np.cos(w_ij * t) * np.sin(k_i * x) * np.sin(k_j * y)
+"""
+    t_dependent = a_ij * np.cos(w_ij*T3)
+    G = t_dependent * np.sin(k_i * X3) * np.sin(k_j * Y3) + \
+        t_dependent * np.sin(k_i2 * X3) * np.sin(k_j2 * Y3) + t_dependent * np.sin(k_i3 * X3) * np.sin(k_j3 * Y3)
 
-t_dependent = a_ij * np.cos(w_ij*T3)
-G = t_dependent * np.sin(k_i * X3) * np.sin(k_j * Y3) + \
-    t_dependent * np.sin(k_i2 * X3) * np.sin(k_j2 * Y3) + t_dependent * np.sin(k_i3 * X3) * np.sin(k_j3 * Y3)
-
-print("This is the data we want to get:\n\n",G[:-1, :-1, 0],"\n\n=====================================================")
+    print("This is the data we want to get:\n\n",G[:-1, :-1, 0],"\n\n=====================================================")
+"""
 
 kivalue = i * np.pi / L
 kjvalue = j * np.pi / L
-ki_values = [kivalue, kivalue * 3, kivalue * 9]
-kj_values = [kjvalue, kjvalue * 3, kjvalue * 9]
+
+def ki_calc(n):
+    global kjvalue
+    ki_values = [kivalue]
+    if n == 0:
+        return ki_values
+    for i in range(n):
+        kival = ki_values[i] * 3
+        ki_values.append(kival)
+    return ki_values
+
+def kj_calc(n):
+    global kjvalue
+    kj_values = [kjvalue]
+    if n == 0:
+        return kj_values
+    for i in range(n):
+        kjval = kj_values[i] * 3
+        kj_values.append(kjval)
+    return kj_values
+
 # indexing of the ki/j_values will be done with n
 
 # We'll make v constant for now
@@ -55,7 +83,7 @@ n = 2
 gg = [0]
 # This is the loop I need to make to run through the k values.
 for m in range(0,n+1):
-    gg = gg + (g(T3, ki_values, kj_values, m) * f(X3, Y3, ki_values, kj_values, m))
+    gg = gg + (g(T3, ki_calc(n), kj_calc(n), m) * f(X3, Y3, ki_calc(n), kj_calc(n), m))
     print("This is what we have for our new value:\n\n","m is: ",m,"\n\n",gg[:-1, :-1, 0],"\n\n")
 
 
@@ -70,7 +98,7 @@ def animate(i):
 anim = animation.FuncAnimation(fig, animate, interval=150, frames=len(t)-1)
 
 writer = PillowWriter(fps=140) 
-anim.save('visual_1_v2.gif', writer=writer)
+#anim.save('visual_1_v2.gif', writer=writer)
 
 plt.draw()
 plt.show()
