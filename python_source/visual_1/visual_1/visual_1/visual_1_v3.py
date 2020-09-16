@@ -1,3 +1,8 @@
+"""
+    Christian B. Molina, cbmolina@ucdavis.edu
+    2020
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import PillowWriter
@@ -79,8 +84,10 @@ def g(t,ki,kj,n):
 def f(x,y,ki,kj,n):
     return np.sin(ki[n] * x) * np.sin(kj[n] * y)
 
-n = 2
+# Change the values of n
+n = 1
 gg = [0]
+
 # This is the loop I need to make to run through the k values.
 for m in range(0,n+1):
     gg = gg + (g(T3, ki_calc(n), kj_calc(n), m) * f(X3, Y3, ki_calc(n), kj_calc(n), m))
@@ -88,9 +95,7 @@ for m in range(0,n+1):
 
 
 
-# Uncommment this section once you produce the same data as G
-# ========================================================================================================
-
+# Production of the colormesh map and the animation
 cax = ax.pcolormesh(x, y, gg[:-1, :-1, 0], vmin=-1, vmax=1, cmap='Spectral')
 fig.colorbar(cax) 
 def animate(i):
@@ -102,3 +107,8 @@ writer = PillowWriter(fps=140)
 
 plt.draw()
 plt.show()
+
+"""
+    We want to see this evolving over time. Make a map showing the time
+    evolution
+"""
