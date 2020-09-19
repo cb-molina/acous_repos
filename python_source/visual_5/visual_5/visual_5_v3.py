@@ -1,14 +1,20 @@
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.use("Agg")
 import matplotlib.animation as animation
 from matplotlib.animation import PillowWriter
 
 
+Writer = animation.writers['ffmpeg']
+writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
+
 plt.style.use('dark_background')
 fig = plt.figure()
+plt.axis(xmin = 0, xmax = 2)
 
 x = np.linspace(0,np.pi*2,1000)
-n = 10
+n = 20
 L = 1
 
 def triangle_wave(x,n):
@@ -28,10 +34,9 @@ for m in range(1,n+1):
 
 
 
-anim = animation.ArtistAnimation(fig, ims, interval=1500, blit=True,
+anim = animation.ArtistAnimation(fig, ims, interval=500, blit=True,
                                 repeat_delay=100)
 
-writer = PillowWriter(fps=1) 
-anim.save('visual_5.gif', writer=writer)
+anim.save('visual_5.mp4',writer = writer)
 
 plt.show()
