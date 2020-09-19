@@ -1,3 +1,8 @@
+"""
+    Christian B Molina
+    UC Davis 2020
+"""
+
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
