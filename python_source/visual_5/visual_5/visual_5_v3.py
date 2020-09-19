@@ -32,11 +32,18 @@ for m in range(1,n+1):
     ims.append([im])
     k = k + 1
 
+"""
+    I think what needs to be done now is control the amount of frames produced.
+    As of now it's only doing a set amount that zips by really fast. 
+"""
 
 
-anim = animation.ArtistAnimation(fig, ims, interval=500, blit=True,
-                                repeat_delay=100)
+anim = animation.ArtistAnimation(fig, ims, interval=15, blit=True)
+"""
+    anim = animation.ArtistAnimation(fig, ims, interval=1500, blit=True,
+                                    repeat_delay=100)
+"""
 
-anim.save('visual_5.mp4',writer = writer)
+anim.save('visual_5.mp4',writer = writer,fps = 120)
 
 plt.show()
